@@ -6,7 +6,7 @@ public class ParallaxBackground : MonoBehaviour
     public float parallaxEffectMultiplier;
     private Vector3 lastCameraPosition;
     private float textureUnitSizeX;
-    private float textureUnitSizeY; // For vertical tiling
+    private float textureUnitSizeY; 
 
     void Start()
     {
@@ -14,7 +14,7 @@ public class ParallaxBackground : MonoBehaviour
         Sprite sprite = GetComponent<SpriteRenderer>().sprite;
         Texture2D texture = sprite.texture;
         textureUnitSizeX = texture.width / sprite.pixelsPerUnit;
-        textureUnitSizeY = texture.height / sprite.pixelsPerUnit; // Calculate the texture size on the Y axis
+        textureUnitSizeY = texture.height / sprite.pixelsPerUnit;
     }
 
     void LateUpdate()
@@ -29,8 +29,6 @@ public class ParallaxBackground : MonoBehaviour
             transform.position = new Vector3(cameraTransform.position.x + offsetPositionX, transform.position.y);
         }
 
-        // For vertical tiling
-        // Check and reposition for vertical movement more proactively
         if (cameraTransform.position.y > transform.position.y + textureUnitSizeY / 2)
         {
             float offsetPositionY = cameraTransform.position.y - transform.position.y + textureUnitSizeY / 2;

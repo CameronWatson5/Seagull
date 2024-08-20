@@ -2,17 +2,20 @@ using UnityEngine;
 
 public class PlayerPositionCheck : MonoBehaviour
 {
-    public Transform cameraTransform; // Assign the camera's transform in the inspector
-    public float threshold = -20f; // How low the player can go before being pushed up. Adjust as needed.
-    public float pushUpSpeed = 10f; // Speed at which the player is pushed up
+    public Transform cameraTransform; 
+    public float leftThreshold = -5f; 
+    public float rightThreshold = 5f; 
+    public float pushSpeed = 10f; 
 
     void Update()
     {
-        // Check if the player is below the threshold
-        if (transform.position.y < cameraTransform.position.y + threshold)
+        if (transform.position.x > cameraTransform.position.x + rightThreshold)
         {
-            // Push the player up
-            transform.position += Vector3.up * pushUpSpeed * Time.deltaTime;
+            transform.position += Vector3.left * pushSpeed * Time.deltaTime;
+        }
+        else if (transform.position.x < cameraTransform.position.x + leftThreshold)
+        {
+            transform.position += Vector3.right * pushSpeed * Time.deltaTime;
         }
     }
 }
